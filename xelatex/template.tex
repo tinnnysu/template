@@ -1,0 +1,76 @@
+\documentclass[a4paper]{article}
+
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=Noto Sans CJK SC Regular,ItalicFont=Noto Sans CJK SC Thin] {Noto Sans CJK SC Light}
+\setCJKsansfont{Noto Sans Mono CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\setmainfont[BoldFont=Noto Sans CJK SC Regular,ItalicFont=Noto Sans CJK SC Thin] {Noto Sans CJK SC Light}
+\setsansfont{Noto Sans Mono CJK SC}
+\setmonofont{Noto Sans Mono CJK SC}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+\usepackage{blindtext}
+\usepackage{scrextend}
+\addtokomafont{labelinglabel}{\sffamily}
+
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{fullpage}
+
+\title{模板}
+\date{2017-5-27}
+\author{苏士涛}
+
+\begin{document}
+  \pagenumbering{gobble}
+  \maketitle
+  \newpage
+  \tableofcontents
+  \newpage
+  \pagenumbering{arabic}
+
+  \section{第一节}
+  \subsection{第一小节}
+  第一段文字，首行缩进。列表示例如下：
+    \begin{labeling}{alligator}
+    \item [启动脚本] 启动该应用。
+    \item [停止脚本] 停止该应用。
+    \item [安装脚本] 安装时执行脚本，用作环境设置或者类似操作。
+    \end{labeling}
+
+  第二段文字，分段测试。
+  \subsection{第二小节}
+    \begin{center}
+        \centering
+        % Define block styles
+        \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+            text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+        \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+            text width=5em, text centered, rounded corners, minimum height=4em]
+        \tikzstyle{line} = [draw, -latex']
+        \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+            minimum height=2em]
+            
+        \begin{tikzpicture}[node distance = 2cm, auto]
+            % Place nodes
+            \node [block] (begin) {begin};
+            \node [block, below of=begin] (app-version) {get app version};
+            \node [block, below of=app-version] (start-app) {start app};
+            \node [block, below of=start-app] (get-update-info) {get update info};
+            \node [decision, below of=get-update-info] (update) {update ?};
+            \node [block, below of=update, node distance=3cm] (install-update) {install update};
+
+            \draw [->] (begin) -- (app-version);
+            \draw [->] (app-version) -- (start-app);
+            \draw [->] (start-app) -- (get-update-info);
+            \draw [->] (get-update-info) -- (update);
+            \draw [->] (update) -- node {Y} (install-update);
+            \draw [->] (install-update.west) -- ++(-2.0cm,0) |- (get-update-info); 
+            \draw [->] (update.east) -- node {N} ++(2.0cm,0) |- (get-update-info); 
+
+        \end{tikzpicture}
+    \end{center}
+\end{document}
